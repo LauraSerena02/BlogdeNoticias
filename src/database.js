@@ -1,9 +1,10 @@
 //Instanciamiento de todos los modulos necesarios
 var typeorm = require("typeorm");
-const news = require('./entities/entityNew')
+const news = require('./entities/entityNew');
 const user = require('./entities/entityUser');
-const typeUser = require('./entities/entityTypeUser');
+const userType = require('./entities/entityUserType');
 const comment = require('./entities/entityComment');
+const rating = require('./entities/entityRating');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -17,18 +18,18 @@ var dataSource = new typeorm.DataSource({
     password: process.env.password,
     database: process.env.database,
     synchronize: false,
-    entities: [news, user, typeUser, comment],
+    entities: [news, user, userType, comment, rating],
 });
 
 //Funcion de conexion a la base de datos
 async function connection() {
-    try {
-        await dataSource.initialize();
+    try { ////Si o si espera que se conecte a la base de datos, sin esto, se dispara el mensaje primero
+        await dataSource.initialize(); 
         console.log('Se ha conectado la base de datos');
     } catch (error) {
         console.log('Ha ocurrido un error ' + error);
     }
 }
 
-//Exportacion de los modulos
+//Exportacion de los modulos para cualquier archivo JavaScript
 module.exports = { connection, dataSource };
