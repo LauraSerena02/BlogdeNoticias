@@ -23,4 +23,7 @@ app.listen(process.env.portbackend || 3000, () => {
     console.log('servidor en el puerto', app.get('port'));
 });
 
+//Rutas
+app.use('/login', require('./routes/authentication'));
+
 
