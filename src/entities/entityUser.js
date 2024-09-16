@@ -10,6 +10,14 @@ const user = new EntitySchema({
             generated: true,
  
         },
+        userName:{
+            type: "varchar"
+        },
+
+        userLastName:{
+            type: "varchar"
+        },
+
         userTypeId: {
             type: "int",
             default: 2 //Por defecto todos son lectores

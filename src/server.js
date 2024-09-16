@@ -25,5 +25,6 @@ app.listen(process.env.portbackend || 3000, () => {
 
 //Rutas
 app.use('/login', require('./routes/authentication'));
+app.use('/news', require('./routes/news'));
 
 
