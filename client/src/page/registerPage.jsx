@@ -28,10 +28,30 @@ function RegisterPage() {
           //const res = await RegisterRequest(values) este es el envio ala api
           //console.log(res)
         })}>
-          <input type="text" name="Nombre" placeholder="Nombre"{...register("Nombre", { required: true })}/>
-          <input type="text" name="Apellido" placeholder="Apellido" {...register("Apellido", { required: true })}/>
-          <input type="email" name="Email" placeholder="Correo Electronico" {...register("Email", { required: true })}/>
-          <input type="password" name="Contraseña" placeholder="Contraseña"{...register("Contraseña", { required: true })} />
+            <input
+      type="text"
+      name="userName"
+      placeholder="Nombre"
+      {...register("userName", { required: true })}
+    />
+    <input
+      type="text"
+      name="userLastName"
+      placeholder="Apellido"
+      {...register("userLastName", { required: true })}
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Correo Electrónico"
+      {...register("email", { required: true })}
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Contraseña"
+      {...register("password", { required: true })}
+    />
           <button type="submit">Ingresar</button>
           <button type="button">Ir a Inicio</button>
         </form>

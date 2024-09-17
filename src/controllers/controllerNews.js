@@ -34,55 +34,61 @@ const showNew = async (req, res) => {
 
 
 
-const createNew = async (req, res) => {
-  try {
-    const data = JSON.parse(req.body.data);
-    const { adminId, title, description, content, publicationDate, category } = data;
-    const imageFile = req.file; // Aquí obtienes el archivo subido desde `multer`
-
-     // Verificar que todos los campos necesarios están presentes
-     if (!adminId|| !title|| !description|| !content|| !publicationDate|| !category) {
-      return res.status(400).json({ error: 'El contenido no está completo' });
-    }
-
-
-    // Subir la imagen a Cloudinary
-    const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream((err, result) => {
-        if (err) {
-          console.log(err);
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      }).end(imageFile.buffer); // `imageFile.buffer` es el archivo en memoria
-    });
-
-    // Crear el objeto noticia con la URL de la foto obtenida de Cloudinary
-    const photo = result.secure_url;
-    const news2 = { adminId, title, description, content, publicationDate, category, photo };
-
-    // Obtener el repositorio y guardar la noticia en la base de datos
-    const repositorio = dataSource.getRepository(news);
-
-    const userNewRepositor = dataSource.getRepository(user);
-    const userId2 = await userNewRepositor.findOne({ where: { userId: adminId } });
-    
-    if (!userId2) {
-      return res.status(401).json({ error: 'No se ha encontrado usuario' });
-  }
-
+  const createNew = async (req, res) => {
+    try {
+      const data = JSON.parse(req.body.data);
+      const { adminId, title, description, content, publicationDate, categoryId } = data;
+      const imageFile = req.file; // Aquí obtienes el archivo subido desde `multer`
   
-  await repositorio.insert(news2);
-
-    // Enviar la respuesta al cliente
-    res.status(200).json({ success: true, msg: 'Noticia agregada', userName: userId2.userName, userLastName: userId2.userLastName});
-  } catch (error) {
-    console.error('Error al ingresar la noticia:', error);
-    res.status(500).json({ error: 'Error al ingresar la noticia' });
-  }
-};
-
+      // Verificar que todos los campos necesarios están presentes
+      if (!adminId || !title || !description || !content || !publicationDate || !categoryId) {
+        return res.status(400).json({ error: 'El contenido no está completo' });
+      }
+  
+      // Obtener el repositorio para la entidad `Category`
+      const categoryRepository = dataSource.getRepository(category);
+      const existingCategory = await categoryRepository.findOne({ where: { name: categoryId } });
+  
+      // Verificar si la categoría existe
+      if (!existingCategory) {
+        return res.status(400).json({ error: 'La categoría no existe' });
+      }
+  
+      // Subir la imagen a Cloudinary
+      const result = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream((err, result) => {
+          if (err) {
+            console.log(err);
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }).end(imageFile.buffer); // `imageFile.buffer` es el archivo en memoria
+      });
+  
+      // Crear el objeto noticia con la URL de la foto obtenida de Cloudinary
+      const photo = result.secure_url;
+      const news2 = { adminId, title, description, content, publicationDate, category, photo };
+  
+      // Obtener el repositorio y guardar la noticia en la base de datos
+      const repositorio = dataSource.getRepository(News); // Asegúrate de que `News` esté definido
+      const userNewRepository = dataSource.getRepository(User); // Asegúrate de que `User` esté definido
+      const userId2 = await userNewRepository.findOne({ where: { userId: adminId } });
+      
+      if (!userId2) {
+        return res.status(401).json({ error: 'No se ha encontrado usuario' });
+      }
+  
+      await repositorio.insert(news2);
+  
+      // Enviar la respuesta al cliente
+      res.status(200).json({ success: true, msg: 'Noticia agregada', userName: userId2.userName, userLastName: userId2.userLastName });
+    } catch (error) {
+      console.error('Error al ingresar la noticia:', error);
+      res.status(500).json({ error: 'Error al ingresar la noticia' });
+    }
+  };
+  
 const updateNew = async (req, res) => {
   try {
     const { newsId } = req.params;

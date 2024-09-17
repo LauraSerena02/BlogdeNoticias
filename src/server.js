@@ -2,12 +2,17 @@
 const express = require ('express'); //Importar librerias
 const morgan = require ('morgan');
 const { connection } = require('./database');
+const cors =require("cors");
 
 const app = express(); //Creo un objeto para usar las funcionalidades de Express
 
 //Inicializacion de coneccion a la DB
 connection();
 
+app.use(cors({
+    origin: 'http://localhost:5173', // forma de decirle que solo este dominio se puede comunicar
+    //credentials:true
+}))
 //middlewares
 app.use(morgan('dev')); //Muestra las peticiones que llegan
 app.use(express.json()) //Traducción de peticiones JSON para entendimiento del backend.
