@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();//Permite crear los endpoints con sus respectivos metodos
 const upload = require('../middleware/multer');
-const { allnews, showNew, createNew, updateNew, deleteNew } = require('../controllers/controllerNews');
+const { allnews, showNew, createNew, updateNew, deleteNew} = require('../controllers/controllerNews');
+
 
 
 

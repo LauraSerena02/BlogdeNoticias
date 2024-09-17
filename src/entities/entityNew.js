@@ -12,6 +12,9 @@ const news = new EntitySchema({
     adminId: {
         type: "int"
       },
+      categoryId: {
+        type: "int"
+      },
     title: {
       type: "varchar"
     },
@@ -24,9 +27,7 @@ const news = new EntitySchema({
     publicationDate: {
       type: "date"
     },
-    category: {
-        type: "varchar"
-      },
+
       photo: {
       type: "text" // Cambiado a 'text' para almacenar imágenes
     },

@@ -6,6 +6,7 @@ const userType = require('./entities/entityUserType');
 const comment = require('./entities/entityComment');
 const rating = require('./entities/entityRating');
 const dotenv = require('dotenv');
+const category = require("./entities/entityCategory");
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ var dataSource = new typeorm.DataSource({
     password: process.env.password,
     database: process.env.database,
     synchronize: false,
-    entities: [news, user, userType, comment, rating],
+    entities: [news, user, userType, comment, rating, category],
 });
 
 //Funcion de conexion a la base de datos
