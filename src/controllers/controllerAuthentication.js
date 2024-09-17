@@ -57,9 +57,9 @@ const login = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const { userName, userLastName, email, password} = req.body;
        
-        const user= {email, password };
+        const user= { userName, userLastName, email, password };
         const hashedPassword = await hashPassword(password);
         user.password = hashedPassword;
         const repositorio = dataSource.getRepository("user");
