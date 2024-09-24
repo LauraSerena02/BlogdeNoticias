@@ -1,0 +1,151 @@
+body.special-body {
+  margin: 0;
+  padding: 0;
+  position: relative; /* Necesario para el pseudo-elemento */
+  background-image: url('../images/login.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+}
+
+body.special-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(144, 119, 97, 0.5); /* Color con 50% de opacidad */
+  z-index: 1; /* Asegúrate de que esté detrás del contenido */
+}
+
+body.special-body > * {
+  position: relative; /* Asegura que el contenido esté por encima del pseudo-elemento */
+  z-index: 2; /* Asegura que el contenido esté por encima del color */
+}
+
+
+
+.header-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  
+  padding: 10px;
+}
+
+.header-register img {
+  max-width: 80px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.header-register h1 {
+  color: white;
+}
+
+.body_register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e2e1da; /* 70% opaco */
+  width: 100%; /* Cambia a 100% para adaptarse a contenedor */
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+  margin-bottom: 20px; /* Espacio entre inputs */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+ 
+}
+
+.asterisk {
+  color: red; /* Color del asterisco */
+  font-size: 16px; /* Tamaño del asterisco */
+  margin-left: 10px; /* Espacio entre el input y el asterisco */
+}
+
+.error-message {
+  color: red; /* Color para mensajes de error */
+  margin-top: 0px; /* Espacio encima del mensaje de error */
+  font-size: 12px; /* Tamaño de fuente para el mensaje de error */
+margin-left: 25px;
+}
+
+
+
+.input-register {
+  display: flex;
+  width: 350px; /* Asegura que el input ocupe el ancho completo */
+  max-width: 600px; /* Limita el ancho máximo del input */
+  height: 40px; /* Ajusta la altura del input */
+  padding: 20px; /* Aumenta el padding para mayor usabilidad */
+  font-size: 16px; /* Tamaño de fuente más grande */
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000000; /* Añade un borde */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 2px; /* Espacio entre inputs */
+  margin-left: 20px;
+}
+
+
+
+
+
+input:focus {
+  border-color: #007bff; /* Color al hacer foco */
+  outline: none;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row; /* Organiza elementos en fila */
+  align-items: center; /* Centra verticalmente */
+  justify-content: flex-start; /* Alinea los elementos al inicio */
+  margin-top: 10px; /* Espacio superior para separar del contenido anterior */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  gap: 15px; /* Espacio de 10px entre los botones */
+}
+
+.button-register {
+  padding: 10px 20px; /* Espaciado interno */
+  background-color: #907761; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 20px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s; /* Transición suave para el color */
+  display: inline-flex; /* Cambia a inline-flex para permitir el centrado */
+ 
+}
+
+.button-register:hover {
+  background-color: #0056b3; /* Color al pasar el mouse */
+}
+
+.text1 {
+  margin-top: 25x;
+  color: #666565;
+  text-align: center;
+  font-size: 10px;
+  
+}
+.text{
+  color: #666565;
+  font-size: 13px;
+  margin-top: 20px; /* Ajusta este valor según lo necesites */
+  text-align: center;
+  
+}
